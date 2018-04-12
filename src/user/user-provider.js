@@ -14,8 +14,12 @@ class UserProvider {
         this.connection = connection;
     }
 
+    provideForSendCode() {
+        return this.connection('user').select().then(results => userFactory.makeFromDB(results[0]));
+    }
+
     provide() {
-        return this.connection('user').select().then(results => userFactory.make(results[0]));
+        return this.connection('user').select().then(results => results.map(element => userFactory.makeFromDB(element)));
     }
 
     confirm(code_confirm) {

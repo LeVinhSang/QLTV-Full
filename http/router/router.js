@@ -160,9 +160,12 @@ router.post('/borrower', checkData.borrower, dataRequest.borrower, borrowerContr
 router.post('/edit/borrower/:id', dataRequest.borrower, borrowerController.update);
 router.get('delete/borrower/:id', borrowerController.remove);
 
-router.put('/user/send-code', userController.sendCode);
-router.put('/user/reset-pass',checkData.code , userController.reset);
-router.put('/user/update', dataRequest.user, userController.update);
+
+router.get('/user', userController.search);
+router.get('/user/send-code', userController.sendCode);
+router.put('/user/reset-pass', checkData.code, userController.reset);
+router.post('/user/update-mail', checkData.code, userController.updateMail);
+router.post('/user/update-pass', checkData.code, userController.updatePass);
 
 
 module.exports = router;

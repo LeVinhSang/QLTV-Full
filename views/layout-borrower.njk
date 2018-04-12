@@ -16,7 +16,16 @@
         #navigator:hover {
             opacity: 1;
         }
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
     </style>
+
+
 </head>
 <body>
 
@@ -32,15 +41,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand">
-                <div class="dropdown">
-                    <img alt="Avatar" class="avatar" src=":bookImages:"/>
-                    <ul class="dropdown-menu">
-                        <li><a href="/logout" class="navbar-brand">Logout</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                    </ul>
-                </div>
+            <div class="dropdown" id="list-user">
+
             </div>
         </div>
         <div class="container-fluid">
@@ -59,6 +61,16 @@
                            aria-describedby="inputGroup-s"  placeholder="search...">
                     <i id="click-search-basic" style="margin-left: -3em" class="btn glyphicon glyphicon-search"></i>
                 </div>
+
+                <script id="userTemplate" type="text/html">
+                    <img alt="Avatar" class="avatar" src=":bookImages:" data-toggle="dropdown"/>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#passModal" style="color:red">Change Pasword</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#emailModal" style="color:red">Change Email</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </script>
+
             </div>
         </div>
     </nav>

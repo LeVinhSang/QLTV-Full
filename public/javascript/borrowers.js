@@ -1,5 +1,19 @@
 $(document).ready( () => {
+
+    $('#button-send-mail').hide();
+    $('#change-pass').hide();
+
     $.get('/api/borrowers').then(renderBorrower);
+
+    $.get('/user').then(renderUser);
+
+    function renderUser(users) {
+        let template = $('#userTemplate').html();
+        let resultsHTML = users.map( user => {
+            return template.replace(':bookImages:', user.images);
+        }).join('');
+        $('#list-user').html(resultsHTML);
+    }
 
     function renderBorrower(borrowers) {
         let template = $('#borrowerTemplate').html();
@@ -57,6 +71,53 @@ $(document).ready( () => {
                 window.location.href='/';
             }
         });
+    });
+
+
+    $('#button-send-code-mail').click ( () => {
+        $('#mail').hide();
+        $('#send-code-confirm-mail').show();
+        $('#button-send-code-mail').hide();
+        $('#button-send-mail').show();
+        $('#text').hide();
+        $('#send-code-again').show();
+
+        $.get('/user/send-code');
+    });
+
+    $('#send-code-again-email').click ( () => {
+        $.get('/user/send-code');
+    });
+
+    $('#button-send-mail').click( () => {
+        $.post('/user/update-mail', {
+            code_confirm: $('#input-code-confirm-mail').val(),
+            email: $('#new-email').val()
+        }).then( data => {
+            alert(data);
+            if(data === 'success') {
+                window.location.href = '/borrowers'
+            }
+        })
     })
+
+    $('#button-send-code-pass').click ( () => {
+        $('#pass').hide();
+        $('#pass-again').hide();
+        $('#send-code-confirm-pass').show();
+        $('#button-send-code-pass').hide();
+        $('#change-pass').show();
+        $('#text-pass').hide();
+        $('#send-code-again-pass').show();
+
+        $.get('/user/send-code');
+    });
+
+
+    $('#send-code-again-pass').click ( () => {
+        $.get('/user/send-code');
+    });
+
+    //todo phan check new pass and pass again
 
 });

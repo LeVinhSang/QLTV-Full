@@ -10,7 +10,9 @@ class CodeSender {
 
     sendCode() {
 
-        return this.provider.provide().then( value => {
+        let repository = this.repository;
+
+        return this.provider.provideForSendCode().then( value => {
             let rn = require('random-number');
             let options = {
                 min:  100000
@@ -33,8 +35,8 @@ class CodeSender {
 
 
             transporter.sendMail(mainOptions, function(){
-                this.repository.writeCode(code).then( () => {
-                    console.log({message: 'success'});
+                repository.writeCode(code).then( () => {
+                    return 0;
                 });
             });
         });

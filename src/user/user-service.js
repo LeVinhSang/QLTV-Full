@@ -1,4 +1,3 @@
-const connection          = require('../../database');
 const bcrypt              = require('bcrypt');
 const saltRounds          = 10;
 
@@ -18,7 +17,7 @@ class UserService {
      *
      * @return {*|PromiseLike|Promise}
      */
-    reset() {
+    resetPass() {
         let connection = this.connection;
         return bcrypt.hash('111111', saltRounds).then(function(hash) {
             return connection('user').update({
@@ -30,19 +29,29 @@ class UserService {
 
     /**
      *
-     * @param {User} user
+     * @param {string} email
      * @return {*|PromiseLike|Promise}
      */
-    edit(user) {
+    editMail(email) {
         return this.connection('user').update({
-            password: user.getPassword(),
-            email: user.getEmail()
+            email: email
         });
     }
 
+    editPass(pass) {
+        let connection = this.connection;
+        return bcrypt.hash(pass, saltRounds).then(function(hash) {
+            return connection('user').update({
+                password: hash,
+                code_confirm: null
+            });
+        });
+    }
+
+
     /**
      *
-     * @param {string} code
+     * @param {int} code
      * @return {*|PromiseLike|Promise}
      */
     writeCode(code) {

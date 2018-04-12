@@ -51,8 +51,23 @@ class User {
     getCode_confirm() {
         return this.code_confirm;
     }
-    
-    
+
+    /**
+     *
+     * @param {string} images
+     */
+    setImages(images) {
+        this.images = images;
+    }
+
+    /**
+     *
+     * @return {string|*}
+     */
+    getImages() {
+        return this.images;
+    }
+
 }
 
 module.exports = User;
