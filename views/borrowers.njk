@@ -1,0 +1,94 @@
+{% extends 'layout-borrower.njk' %}
+
+{% block content %}
+
+<section>
+    <div style="
+    margin-top: -50px;
+    background-image: url(https://www.bma.org.uk/~/asset/4/29766.ashx?format=8|10000);
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 300px;
+    ">
+
+    </div>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Book</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="add-book" >
+                    <div class="form-group">
+                        <label>Code: </label><label style="color: red"> (*)</label>
+                        <input class="form-control" id="code" placeholder="code...">
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label><label style="color: red"> (*)</label>
+                        <input class="form-control" id="name_borrower" placeholder="name...">
+                    </div>
+                    <div class="form-group">
+                        <label>Email: </label><label style="color: red"> (*)</label>
+                        <input class="form-control" id="email" placeholder="Email...">
+                    </div>
+                    <div class="form-group">
+                        <label>Name Book: </label><label style="color: red"> (*)</label>
+                        <select class="form-control" id="list-book" name="book_id">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Return:</label> <label style="color: red"> (*)</label>
+                        <input type='date' class="form-control" id="date_return" placeholder="date return...">
+                    </div>
+
+                    <button hidden type="submit" class="btn btn-primary" id="add">Create</button>
+                    <label style="color: red">The (*) sign must not be left blank.</label>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <section id="all">
+                <ul id="list-borrower" class="list-group">
+                </ul>
+            </section>
+            <script id="borrowerTemplate" type="text/html">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" id="get-detail" >
+                        <p><img width="100px" height="100px" src=":bookImages:"/></p>
+                        <a href="#" id="show-detail" role="button" aria-expanded="false">:borrowerCode:</a>
+                        <p><label style="color: blue">Name: </label> :borrowerName:</p>
+                        <p><label style="color: blue">Book: </label> :bookTitle:           </p>
+                        <p><label style="color: blue">Email: </label> :borrowerEmail:       </p>
+                        <p><label style="color: blue">Date Borrow: </label> :borrowDate:          </p>
+                        <p><label style="color: blue">Date Return: </label> :ReturnDate:        </p>
+                        <a href="/api/:name::id" id="edit" class="btn btn-primary">Edit</a>
+                        <a href="/delete/:name::id" class="btn btn-danger">Delete</a>
+                    </li>
+                </ul>
+            </script>
+
+            <script id="bookTemplate" type="text/html">
+                <option value=":book.id:">:book.title:</option>
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<script src="/javascript/borrowers.js"></script>

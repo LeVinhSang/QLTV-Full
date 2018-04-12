@@ -1,0 +1,24 @@
+{
+  "name": "qltv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.14.1",
+    "express-session": "^1.15.6",
+    "jquery": "^3.3.1",
+    "knex": "^0.14.4",
+    "mysql": "*",
+    "nodemailer": "^4.6.4",
+    "nunjucks": "^3.1.2",
+    "random-number": "0.0.9"
+  }
+}

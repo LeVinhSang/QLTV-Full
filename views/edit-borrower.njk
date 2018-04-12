@@ -1,0 +1,47 @@
+{% extends 'layout-edit_borrower.njk' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <section>
+                <form class="form-group" method="post" action="/edit/borrower/{{borrower.getId()}}">
+                    <div class="form-group">
+                        <label>Code:</label>
+                        <input value="{{borrower.getCode()}}" class="form-control" name="code" placeholder="code">
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input value="{{borrower.getName()}}" class="form-control" name="name_borrower" placeholder="student name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input value="{{borrower.getEmail()}}" class="form-control" name="email" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Book</label>
+                        <select class="form-control" id="list-publisher" name="book_id">
+                            <option value="">Null</option>
+                            {% for book in books %}
+                            {% if borrower.getBook().getId() === book.getId() %}
+                            <option value="{{borrower.getBook().getId()}}" selected>{{borrower.getBook().getTitle()}}</option>
+                            {% else %}
+                            <option value="{{book.getId()}}">{{book.getTitle()}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date Return:</label>
+                        <input value="{{borrower.getDateReturn()}}" type="date" class="form-control" name="date_return" placeholder="date return">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

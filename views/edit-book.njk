@@ -1,0 +1,51 @@
+{% extends 'layout-edit_book.njk' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <section>
+                <form class="form-group" method="post" action="/edit/book/{{book.getId()}}">
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input value="{{book.getTitle()}}" class="form-control" name="title" placeholder="title">
+                    </div>
+                    <div class="form-group">
+                        <label>Author:</label>
+                        <input value="{{book.getAuthor()}}" class="form-control" name="author" placeholder="author">
+                    </div>
+                    <div class="form-group">
+                        <label>images:</label>
+                        <input value="{{book.getImages()}}" class="form-control" name="images" placeholder="images">
+                    </div>
+                    <div class="form-group">
+                        <label>Publisher:</label>
+                        <select class="form-control" id="list-publisher" name="publisher_id">
+                            <option value="">Null</option>
+                            {% for publisher in publishers %}
+                            {% if book.getPublisher().getId() === publisher.getId() %}
+                            <option value="{{book.getPublisher().getId()}}" selected>{{book.getPublisher().getName()}}</option>
+                            {% else %}
+                            <option value="{{publisher.getId()}}">{{publisher.getName()}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Genre:</label>
+                        <input value="{{book.getGenre()}}" class="form-control" name="genre" placeholder="genre">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Published_in:</label>
+                        <input value="{{book.getPublished_in()}}" type="number" class="form-control" name="published_in" placeholder="published_in">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

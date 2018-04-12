@@ -1,0 +1,127 @@
+{% extends 'layout-books.njk' %}
+
+{% block content %}
+
+<section>
+    <div style="
+    margin-top: -50px;
+    background-image: url(https://www.bma.org.uk/~/asset/4/29766.ashx?format=8|10000);
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 300px;
+    ">
+
+    </div>
+</section>
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <section id="all">
+                <ul id="books-list" class="list-group">
+                </ul>
+            </section>
+            <script id="bookTemplate" type="text/html">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" id="get-detail" >
+                        <p><img width="100px" height="100px" src=":bookImages:"/></p>
+                        <p style="color: blue">:bookTitle:</p>
+                        <p>:bookAuthor:      </p>
+                        <p>:bookPublisher:   </p>
+                        <p>:bookGenre:       </p>
+                        <p>:bookPublished_in:</p>
+                        <a href="/api/:name::id" class="btn btn-primary">Edit</a>
+                        <a href="/delete/:name::id" class="btn btn-danger">Delete</a>
+                    </li>
+                </ul>
+            </script>
+            <script id="publisherTemplate" type="text/html">
+                <option value=":publisher.id:">:publisher.name:</option>
+            </script>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="bookModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Borrower</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="add-borrower">
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input class="form-control" id="title" placeholder="title...">
+                    </div>
+                    <div class="form-group">
+                        <label>Author:</label>
+                        <input class="form-control" id="author" placeholder="author...">
+                    </div>
+                    <div class="form-group">
+                        <label>Images:</label>
+                        <input class="form-control" id="images" placeholder="images...">
+                    </div>
+                    <div class="form-group">
+                        <label>Publisher:</label>
+                        <select class="form-control" id="list-publisher" name="publisher_id">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Genre:</label>
+                        <input class="form-control" id="genre" placeholder="genre...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Published in:</label>
+                        <input type = 'number' class="form-control" id="published_in" placeholder="published_in...">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="add" >Create</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="publisherModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Publisher</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input class="form-control" id="name" placeholder="name...">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input class="form-control" id="phone" placeholder="phone...">
+                    </div>
+                    <div class="form-group">
+                        <label>Address:</label>
+                        <input class="form-control" id="address" placeholder="address...">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="add-publisher" >Create</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<script src="/javascript/books.js"></script>
+
