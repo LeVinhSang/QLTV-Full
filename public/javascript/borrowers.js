@@ -75,19 +75,38 @@ $(document).ready( () => {
 
 
     $('#button-send-code-mail').click ( () => {
-        $('#mail').hide();
-        $('#send-code-confirm-mail').show();
-        $('#button-send-code-mail').hide();
-        $('#button-send-mail').show();
-        $('#text').hide();
-        $('#send-code-again').show();
+        if( !isValidEmailAddress( $('#new-email').val() ) ) {
+            $('#warning-input-email').show();
+        }
 
-        $.get('/user/send-code');
+        else {
+            $('#warning-input-email').hide();
+            $('#mail').hide();
+            $('#send-code-confirm-mail').show();
+            $('#button-send-code-mail').hide();
+            $('#button-send-mail').show();
+            $('#text').hide();
+            $('#send-code-again').show();
+
+            $.post('/user/send-code-email', {
+                email: $('#new-email').val()
+            });
+        }
+
     });
 
     $('#send-code-again-email').click ( () => {
-        $.get('/user/send-code');
+        $.post('/user/send-code-email', {
+            email: $('#new-email').val()
+        });
     });
+
+
+    function isValidEmailAddress(emailAddress) {
+        let pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+        return pattern.test(emailAddress);
+    };
+
 
     $('#button-send-mail').click( () => {
         $.post('/user/update-mail', {
@@ -102,22 +121,53 @@ $(document).ready( () => {
     })
 
     $('#button-send-code-pass').click ( () => {
-        $('#pass').hide();
-        $('#pass-again').hide();
-        $('#send-code-confirm-pass').show();
-        $('#button-send-code-pass').hide();
-        $('#change-pass').show();
-        $('#text-pass').hide();
-        $('#send-code-again-pass').show();
+        if( $('#new-pass').val() !== $('#input-again-pass').val()) {
+            $('#warning-input-pass-again').show();
+        }
 
-        $.get('/user/send-code');
+        else if( $('#new-pass').val().length < 6) {
+            $('#warning-input-pass').show();
+        }
+
+        else {
+            $('#pass').hide();
+            $('#pass-again').hide();
+            $('#send-code-confirm-pass').show();
+            $('#button-send-code-pass').hide();
+            $('#change-pass').show();
+            $('#text-pass').hide();
+            $('#send-code-again-pass').show();
+            $('#warning-input-pass-again').hide();
+            $.get('/user/send-code-pass');
+        }
+
     });
 
 
     $('#send-code-again-pass').click ( () => {
-        $.get('/user/send-code');
+        $.get('/user/send-code-pass');
     });
 
-    //todo phan check new pass and pass again
+    $('#new-pass').change( () => {
+        if($('#new-pass').val().length < 6) {
+            $('#warning-input-pass').show();
+        }
+        if($('#new-pass').val().length >= 6) {
+            $('#warning-input-pass').hide();
+        }
+    });
+
+    $('#change-pass').click( () => {
+        $.post('/user/update-pass', {
+            code_confirm: $('#input-code-confirm-pass').val(),
+            password: $('#new-pass').val()
+        }).then( data => {
+            alert(data);
+            if(data === 'success') {
+                window.location.href = '/borrowers'
+            }
+        })
+    })
+
 
 });

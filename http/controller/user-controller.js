@@ -1,8 +1,15 @@
 class UserController {
 
-    sendCode(req, res, next) {
+    sendCodeMail(req, res, next) {
         let service = req.app.get('code.service');
-        service.sendCode().then(() => {
+        service.sendCodeChangeMail(req.body.email).then(() => {
+            res.send({message: 'success'})
+        }).catch(next);
+    }
+
+    sendCodePass(req, res, next) {
+        let service = req.app.get('code.service');
+        service.sendCodeChangePass().then(() => {
             res.send({message: 'success'})
         }).catch(next);
     }

@@ -162,7 +162,8 @@ router.get('delete/borrower/:id', borrowerController.remove);
 
 
 router.get('/user', userController.search);
-router.get('/user/send-code', userController.sendCode);
+router.get('/user/send-code-pass', userController.sendCodePass);
+router.post('/user/send-code-email', userController.sendCodeMail);
 router.put('/user/reset-pass', checkData.code, userController.reset);
 router.post('/user/update-mail', checkData.code, userController.updateMail);
 router.post('/user/update-pass', checkData.code, userController.updatePass);

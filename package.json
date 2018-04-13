@@ -15,7 +15,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
-    "knex": "^0.14.4",
+    "knex": "^0.14.6",
     "mysql": "*",
     "nodemailer": "^4.6.4",
     "nunjucks": "^3.1.2",
