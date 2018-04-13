@@ -2,6 +2,7 @@ $(document).ready( () => {
 
     $('#button-send-mail').hide();
     $('#change-pass').hide();
+    $('#send-mail').hide();
 
     $.get('/api/borrowers').then(renderBorrower);
 
@@ -50,11 +51,15 @@ $(document).ready( () => {
     $.get('/api/books').then(renderBookOfBorrow_books);
 
     $('#search-out-date').click( () => {
+        $('#send-mail').show();
         $.get('/api/borrowers/search-out-date').then(renderBorrower);
     });
 
     $('#send-mail').click( () => {
-        $.get('/api/borrowers/send-mail').then(alert('success'));
+        $.get('/api/borrowers/send-mail').then( () => {
+            alert('success');
+            window.location.href = '/borrowers';
+        });
     });
 
     $('#add').click( () => {

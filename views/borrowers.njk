@@ -161,6 +161,24 @@
             <script id="bookTemplate" type="text/html">
                 <option value=":book.id:">:book.title:</option>
             </script>
+
+            <script id="userTemplate" type="text/html">
+                <img alt="Avatar" class="avatar" src=":bookImages:" data-toggle="dropdown"/>
+                <div class="dropdown-menu">
+                    <ul class="list-group">
+                        <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span>
+                            <a href="#" data-toggle="modal" data-target="#passModal">Change Pasword</a>
+                        </li>
+                        <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span>
+                            <a href="#" data-toggle="modal" data-target="#emailModal">Change Email</a>
+                        </li>
+                        <li class="list-group-item"><span class="glyphicon glyphicon-log-out"></span>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </script>
+
         </div>
     </div>
 </div>

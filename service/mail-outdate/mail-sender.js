@@ -11,6 +11,8 @@ class MailSender {
 
     send() {
 
+        let repository = this.repository;
+
         return this.provider.provide().then( value => {
             for(let i =0; i< value.length; i++){
                 let mainOptions = {
@@ -23,7 +25,7 @@ class MailSender {
                     '<p>Xin cám ơn !</p>'
                 };
                 transporter.sendMail(mainOptions, function(){
-                    this.repository.confirm_send_mail(value[i].id).then( () => {
+                    repository.confirm_send_mail(value[i].id).then( () => {
                         return true;
                     });
                 });
