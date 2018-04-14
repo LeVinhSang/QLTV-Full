@@ -4,7 +4,7 @@ const BorrowerSearcher          = require('./searching-service/searcher');
 
 module.exports = (app) => {
     let connection = app.get('databaseConnection');
-    app.set('borrower.request', new BorrowerFactory());
+    app.set('borrower.request', new BorrowerFactory(app));
     app.set('borrower.repo', new BorrowerRepository(connection));
     app.set('borrowers.searcher', new BorrowerSearcher(connection, new BorrowerFactory()));
 };

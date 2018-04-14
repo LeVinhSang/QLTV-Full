@@ -1,15 +1,17 @@
 const Book                = require('./book');
-const PublisherProvider   = require('../publisher/publisher-provider');
-const connection          = require('../../database');
 const PublisherFactory    = require('../publisher/publisher-factory');
 
 
-let publisherProvider     = new PublisherProvider(connection);
 let publisherFactory      = new PublisherFactory();
 
 class BookFactory {
 
+    constructor(app) {
+        this.app = app;
+    }
+
     makeFromRequest(bookRaw) {
+        let publisherProvider = this.app.get('publishers.provider');
         let book = new Book(bookRaw.title);
         book.setAuthor(bookRaw.author);
         book.setPublished_in(bookRaw.published_in);
