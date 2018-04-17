@@ -15,11 +15,6 @@ $(document).ready( () => {
         });
     });
 
-    $('#home').click( () => {
-        $('#book').hide();
-        $('#borrowers').show();
-    });
-
 
     $.get('/api/borrowers').then(renderBorrower);
 
@@ -48,26 +43,5 @@ $(document).ready( () => {
         $('#borrowers').show();
         $.get('/api/borrowers/search-out-date').then(renderBorrower);
     });
-
-    $('#search-books').click( () => {
-        $('#book').show();
-        $('#borrowers').hide();
-        $.get('/api/books').then(renderBook);
-    });
-
-    function renderBook(books) {
-        let template = $('#bookTemplate').html();
-        let resultsHTML = books.map( (book) => {
-            return template.replace(':bookImages:', book.images)
-                .replace(':bookTitle:', book.title)
-                .replace(':bookAuthor:', book.author)
-                .replace(':bookGenre:', book.genre)
-                .replace(':bookPublisher:', book.publisher.name)
-                .replace(':bookPublished_in:', book.published_in)
-                .replace(':name::id', 'book/'+book.id)
-                .replace(':name::id', 'book/'+book.id)
-        }).join('');
-        $('#books-list').html(resultsHTML);
-    }
 
 });

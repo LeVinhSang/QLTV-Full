@@ -1,4 +1,4 @@
-{% extends 'layout-home.njk' %}
+{% extends 'layout-home-books.njk' %}
 
 {% block content %}
 
@@ -49,30 +49,27 @@
     </div>
 </div>
 
-<div id="borrowers" class="container-fluid">
+<div id="book" class="container-fluid">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel-body">
             <section>
-                <ul id="list-borrower" class="list-group">
+                <ul id="books-list" class="list-group">
                 </ul>
             </section>
-            <script id="borrowerTemplate" type="text/html">
+            <script id="bookTemplate" type="text/html">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-action" >
+                    <li class="list-group-item list-group-item-action" id="get-detail" >
                         <p><img width="100px" height="100px" src=":bookImages:"/></p>
-                        <a href="#" id="show-detail" role="button" aria-expanded="false">:borrowerCode:</a>
-                        <p><label style="color: blue">Name: </label> :borrowerName:</p>
-                        <p><label style="color: blue">Book: </label> :bookTitle:           </p>
-                        <p><label style="color: blue">Email: </label> :borrowerEmail:       </p>
-                        <p><label style="color: blue">Date Borrow: </label> :borrowDate:          </p>
-                        <p><label style="color: blue">Date Return: </label> :ReturnDate:        </p>
+                        <p style="color: blue">:bookTitle:</p>
+                        <p>:bookAuthor:      </p>
+                        <p>:bookPublisher:   </p>
+                        <p>:bookGenre:       </p>
+                        <p>:bookPublished_in:</p>
                     </li>
                 </ul>
             </script>
         </div>
     </div>
 </div>
-
-
 {% endblock %}
-<script src="/javascript/home.js"></script>
+<script src="/javascript/home-books.js"></script>

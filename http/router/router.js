@@ -47,6 +47,10 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/home/books', (req, res) => {
+    res.render('home-books.njk');
+});
+
 router.post('/login', checkData.login, (req, res) => {
     req.session.email = req.body.email;
     req.session.password = req.body.password;
