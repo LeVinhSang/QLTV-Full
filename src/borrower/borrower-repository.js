@@ -12,10 +12,9 @@ class BorrowerRepository {
 
     add(borrower) {
         return this.connection('borrowers').insert({
-            code: borrower.getCode(),
+            code: borrower.getCode().getAccount(),
             name_borrower: borrower.getName(),
             book_id: borrower.getBook().getId(),
-            email: borrower.getEmail(),
             date_borrow: new Date().toLocaleString(),
             date_return: borrower.getDateReturn()
         });
@@ -23,10 +22,9 @@ class BorrowerRepository {
 
     edit(borrower) {
         return this.connection('borrowers').update({
-            code: borrower.getCode(),
+            code: borrower.getCode().getAccount(),
             name_borrower: borrower.getName(),
             book_id: borrower.getBook().getId(),
-            email: borrower.getEmail(),
             date_return: borrower.getDateReturn()
         }).where({id: borrower.getId()});
     }

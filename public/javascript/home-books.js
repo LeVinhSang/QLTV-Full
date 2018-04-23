@@ -12,5 +12,27 @@ $(document).ready( () => {
         $('#books-list').html(resultsHTML);
     }
 
+    $('#input_search').change( () => {
+        $.get('/api/books/search-basic', {
+            keyword: $('#input_search').val()
+        }).then(renderBook)
+    });
+
     $.get('/api/books').then(renderBook);
+
+    $("#login").click(function(){
+        $.post("/login", {
+            email: $("#user_name").val(),
+            pass: $("#password").val()
+        }, function(data) {
+
+            if(data ==='done') {
+                window.location.href="/borrowers";
+            }
+            else {
+                alert(data);
+            }
+        });
+    });
+
 });

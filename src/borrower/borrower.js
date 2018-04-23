@@ -2,7 +2,7 @@ class Borrower {
 
     /**
      *
-     * @param {int} code
+     * @param {User} code
      * @param {Book} book
      * @param {string} date_borrow
      * @param {string} date_return
@@ -16,7 +16,7 @@ class Borrower {
 
     /**
      *
-     * @return {int|*}
+     * @return {User}
      */
     getCode() {
         return this.code;
@@ -76,22 +76,6 @@ class Borrower {
      */
     getId() {
         return this.id;
-    }
-
-    /**
-     *
-     * @param {string} email
-     */
-    setEmail(email) {
-        this.email = email;
-    }
-
-    /**
-     *
-     * @return {string|*}
-     */
-    getEmail() {
-        return this.email;
     }
 }
 

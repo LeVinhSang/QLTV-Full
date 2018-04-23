@@ -71,7 +71,7 @@ router.get('/logout', (req, res) => {
 
 router.get('/borrowers', (req, res) => {
     if(req.session.email) {
-        res.render('borrowers.njk');
+        res.render('borrowers.njk', {account: req.session.email});
     }
     else {
         res.redirect('/');

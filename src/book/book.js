@@ -112,6 +112,22 @@ class Book {
         return this.images;
     }
 
+    /**
+     *
+     * @param {int} amount
+     */
+    setAmount(amount) {
+        this.amount = amount;
+    }
+
+    /**
+     *
+     * @returns {int|*}
+     */
+    getAmount() {
+        return this.amount;
+    }
+
 }
 
 module.exports = Book;

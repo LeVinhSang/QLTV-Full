@@ -21,9 +21,9 @@ class Searcher {
     search(condition) {
         let factory = this.factory;
         let sqlQuery = this.connection
-            .select('borrowers.id', 'borrowers.code', 'borrowers.name_borrower', 'borrowers.email', 'borrowers.book_id', 'borrowers.date_borrow',
-                'borrowers.date_return',
-                'books.id', 'books.title', 'books.author', 'books.images', 'books.publisher_id', 'books.genre', 'books.published_in',
+            .select('borrowers.id', 'borrowers.code', 'borrowers.name_borrower', 'borrowers.book_id', 'borrowers.date_borrow',
+                'borrowers.date_return', 'users.account', 'users.email', 'users.images',
+                'books.id', 'books.title', 'books.author', 'books.images_book', 'books.publisher_id', 'books.genre', 'books.published_in',
                 'publishers.name', 'publishers.phone', 'publishers.address')
             .from('borrowers')
             .leftJoin('books', function () {
@@ -31,6 +31,9 @@ class Searcher {
             })
             .leftJoin('publishers', function () {
                 this.on('publisher_id', '=', 'publishers.id')
+            })
+            .leftJoin('users', function () {
+                this.on('borrowers.code', '=', 'users.account')
             });
 
         condition.describe(sqlQuery);

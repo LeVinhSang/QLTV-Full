@@ -8,11 +8,11 @@ class CodeSender {
         this.repository = repository;
     }
 
-    sendCodeChangeMail(mail) {
+    sendCodeChangeMail(mail, account) {
 
         let repository = this.repository;
 
-        return this.provider.provideForSendCode().then( value => {
+        return this.provider.provideForSendCode(account).then( value => {
             let rn = require('random-number');
             let options = {
                 min:  100000
@@ -43,11 +43,11 @@ class CodeSender {
 
     }
 
-    sendCodeChangePass() {
+    sendCodeChangePass(account) {
 
         let repository = this.repository;
 
-        return this.provider.provideForSendCode().then( value => {
+        return this.provider.provideForSendCode(account).then( value => {
             let rn = require('random-number');
             let options = {
                 min:  100000
@@ -70,7 +70,7 @@ class CodeSender {
 
 
             transporter.sendMail(mainOptions, function(){
-                repository.writeCode(code).then( () => {
+                repository.writeCode(code, account).then( () => {
                     return 0;
                 });
             });

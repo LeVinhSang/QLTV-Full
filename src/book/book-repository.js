@@ -14,7 +14,8 @@ class BookRepository {
         return this.connection('books').insert({
             title: book.getTitle(),
             author: book.getAuthor(),
-            images: book.getImages(),
+            images_book: book.getImages(),
+            amount: book.getAmount(),
             publisher_id: book.getPublisher().getId(),
             genre: book.getGenre(),
             published_in: book.getPublished_in()
@@ -26,7 +27,8 @@ class BookRepository {
         return this.connection('books').update({
             title: book.getTitle(),
             author: book.getAuthor(),
-            images: book.getImages(),
+            images_book: book.getImages(),
+            amount: book.getAmount(),
             publisher_id: book.getPublisher().getId(),
             genre: book.getGenre(),
             published_in: book.getPublished_in()

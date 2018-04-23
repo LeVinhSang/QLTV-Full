@@ -14,16 +14,22 @@ class UserProvider {
         this.connection = connection;
     }
 
-    provideForSendCode() {
-        return this.connection('user').select().then(results => userFactory.makeFromDB(results[0]));
+    provideForSendCode(account) {
+        return this.connection('users').select()
+            .where({account: account})
+            .then(results => userFactory.makeFromDB(results[0]));
     }
 
-    provide() {
-        return this.connection('user').select().then(results => results.map(element => userFactory.makeFromDB(element)));
+    provide(account) {
+        return this.connection('users').select()
+            .where({account: account})
+            .then(results => results.map(element => userFactory.makeFromDB(element)));
     }
 
-    confirm(code_confirm) {
-        return this.connection('user').select().where({code_confirm: code_confirm}).then(value => value);
+    confirm(code_confirm, account) {
+        return this.connection('users').select()
+            .where({code_confirm: code_confirm, account: account})
+            .then(value => value);
     }
 
     /**
@@ -32,7 +38,7 @@ class UserProvider {
      * @return {*|PromiseLike|Promise}
      */
     provideUser(account) {
-        return this.connection('user').select()
+        return this.connection('users').select()
             .where({account: account})
             .then(results => {
                 if(results.length === 0) {

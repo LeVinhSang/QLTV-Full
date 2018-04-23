@@ -17,7 +17,8 @@ class BookFactory {
         book.setPublished_in(bookRaw.published_in);
         book.setGenre(bookRaw.genre);
         book.setId(bookRaw.id);
-        book.setImages(bookRaw.images);
+        book.setAmount(bookRaw.amount);
+        book.setImages(bookRaw.images_book);
         return publisherProvider.provide(bookRaw.publisher_id)
             .then( publisher => {
                 book.setPublisher(publisher);
@@ -28,7 +29,8 @@ class BookFactory {
     makeFromDB(bookRaw) {
         let book = new Book(bookRaw.title);
         book.setAuthor(bookRaw.author);
-        book.setImages(bookRaw.images);
+        book.setImages(bookRaw.images_book);
+        book.setAmount(bookRaw.amount);
         book.setPublished_in(bookRaw.published_in);
         book.setGenre(bookRaw.genre);
         let publisher = publisherFactory.makeFromDB(bookRaw);

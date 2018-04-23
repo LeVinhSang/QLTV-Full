@@ -17,9 +17,9 @@ class MailSender {
             for(let i =0; i< value.length; i++){
                 let mainOptions = {
                     from: 'process.env.DB_EMAIL',
-                    to: value[i].email,
+                    to: value[i].user.email,
                     subject: 'Thông Báo Trả Sách',
-                    text: value[i].email[i].name_borrower,
+                    text: value[i].user.email.name_borrower,
                     html: '<p>Dear: ' + value[i].name_borrower + '</p>'+
                     '<p>Bạn đã hết thời gian mượn sách ở thư viện, bạn vui lòng tới thư viện để trả sách</p>'+
                     '<p>Xin cám ơn !</p>'

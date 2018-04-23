@@ -2,35 +2,35 @@ class UserController {
 
     sendCodeMail(req, res, next) {
         let service = req.app.get('code.service');
-        service.sendCodeChangeMail(req.body.email).then(() => {
+        service.sendCodeChangeMail(req.body.email, req.body.account).then(() => {
             res.send({message: 'success'})
         }).catch(next);
     }
 
     sendCodePass(req, res, next) {
         let service = req.app.get('code.service');
-        service.sendCodeChangePass().then(() => {
+        service.sendCodeChangePass(req.body.account).then(() => {
             res.send({message: 'success'})
         }).catch(next);
     }
 
     reset(req, res, next) {
         let service = req.app.get('user.service');
-        service.resetPass.then( () => {
+        service.resetPass(req.body.account).then( () => {
             res.send({message: 'success'});
         }).catch(next);
     }
 
     updateMail(req, res, next) {
         let service = req.app.get('user.service');
-        service.editMail(req.body.email).then( () => {
+        service.editMail(req.body.email, req.body.account).then( () => {
             res.send('success');
         }).catch(next);
     }
 
     updatePass(req, res, next) {
         let service = req.app.get('user.service');
-        service.editPass(req.body.password).then( () => {
+        service.editPass(req.body.password, req.body.account).then( () => {
             res.send('success');
         }).catch(next);
     }

@@ -13,7 +13,13 @@
     width: 100%;
     height: 300px;
     ">
-
+        <br><br><br><br><br><br><br>
+        <div class="col-md-8 col-md-offset-2">
+            <div  class="navbar navbar-expand-lg navbar-light bg-light">
+                <input id="input_search" type="text" class="form-control" aria-label="Default"
+                       aria-describedby="inputGroup-s"  placeholder="search...">
+            </div>
+        </div>
     </div>
 </section>
 
@@ -163,7 +169,7 @@
             </script>
 
             <script id="userTemplate" type="text/html">
-                <img alt="Avatar" class="avatar" src=":bookImages:" data-toggle="dropdown"/>
+                <img alt="Avatar" class="avatar" src="{{account}}" data-toggle="dropdown"/>
                 <div class="dropdown-menu">
                     <ul class="list-group">
                         <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span>
